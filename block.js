@@ -12,15 +12,17 @@ class Block{
       
       World.add(world, this.body);
     }
+    
     display(){
-      var pos = this.body.position;
-      var angle = this.body.angle;
-
-      if(this.body.speed<3){
-        this.body.display();
-      }
-      else{
-        World.remove(world, this.body)
+      if (this.body.speed > 3) {
+        push();
+        World.remove(world, this.body);
+        this.visibility = this.visibility - 5;
+        tint(255, this.visibility);
+        pop();
+      } else {
+        var pos =this.body.position;
+        var angle = this.body.angle;
         push();
         translate(pos.x, pos.y);
         rotate(angle);
@@ -28,8 +30,6 @@ class Block{
         strokeWeight(2);
         stroke(217, 82, 4);
         fill(242, 135, 5);
-        this.visibility = this.visibility -5;
-        tint(255, this.visibility);
         rect(0, 0, this.width, this.height);
         pop();
       }
